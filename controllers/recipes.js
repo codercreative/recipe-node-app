@@ -1,9 +1,12 @@
+const recipe = require("../models/recipe");
+
 const getAllRecipes = (req, res) => {
   res.send("Get all recipes");
 };
 
-const createRecipe = (req, res) => {
-  res.send("Create recipe");
+const createRecipe = async (req, res) => {
+  const newRecipe = await recipe.create(req.body);
+  res.status(201).json({ newRecipe });
 };
 
 const getRecipe = (req, res) => {
