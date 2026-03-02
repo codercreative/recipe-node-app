@@ -2,7 +2,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 const express = require("express");
 const app = express();
-
+const notFound = require("./middleware/not-found");
+const authRouter = require("./routes/auth");
 const recipesRouter = require("./routes/recipes");
 
 // connectDB
@@ -22,16 +23,15 @@ app.get("/", (req, res) => {
   res.status(200).send("Home Page");
 });
 
+app.use("/auth", authRouter);
 app.use("/recipes", recipesRouter);
 
-//Catch all 404 middleware
-app.use((req, res) => {
-  res.status(404).send("<h1>This resource does not exist!</h1>");
-});
+//Catch all 404 middleware (not-found.js)
+app.use(notFound);
 
 //===Listening to port===
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const start = async () => {
   try {
