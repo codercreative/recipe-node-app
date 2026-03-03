@@ -3,19 +3,19 @@ const mongoose = require("mongoose");
 const RecipeSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: [true, "provide a recipe title"],
     trim: true,
     maxLength: [50, "name cannot be more than 50 characters"],
+    required: [true, "provide a recipe title"],
   },
   ingredients: {
     type: [String],
-    required: [true, "provide ingredients"],
     validate: [minOne, "provide at least one ingredient"],
+    required: [true, "provide ingredients"],
   },
   instructions: {
     type: [String],
-    required: [true, "please provide instructions"],
     validate: [minOne, "provide at least one instruction"],
+    required: [true, "please provide instructions"],
   },
   prepTime: {
     type: Number,
@@ -32,4 +32,4 @@ function minOne(array) {
   return array.length >= 1;
 }
 
-module.exports = mongoose.model("recipe", RecipeSchema);
+module.exports = mongoose.model("Recipe", RecipeSchema);

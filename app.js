@@ -9,6 +9,9 @@ const recipesRouter = require("./routes/recipes");
 // connectDB
 const connectDB = require("./db/connect");
 
+// importing auth middleware to protect all user routes
+const authenticateUser = require("./middleware/auth");
+
 //set up static public folder
 app.use(express.static("./public"));
 
@@ -24,7 +27,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRouter);
-app.use("/recipes", recipesRouter);
+// inserting auth middleware before the recipesRouter to proctect user routes
+app.use("/recipes", authenticateUser, recipesRouter);
 
 //Catch all 404 middleware (not-found.js)
 app.use(notFound);

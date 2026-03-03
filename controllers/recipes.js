@@ -1,8 +1,8 @@
-const recipe = require("../models/recipe");
+const Recipe = require("../models/Recipe");
 
 const getAllRecipes = async (req, res) => {
   try {
-    const allRecipes = await recipe.find({});
+    const allRecipes = await Recipe.find({});
     res.status(200).json(allRecipes);
   } catch (error) {
     console.log(error);
@@ -12,7 +12,7 @@ const getAllRecipes = async (req, res) => {
 
 const createRecipe = async (req, res) => {
   try {
-    const newRecipe = await recipe.create(req.body);
+    const newRecipe = await Recipe.create(req.body);
     res.status(201).json({ newRecipe });
   } catch (error) {
     console.log(error);
@@ -22,7 +22,7 @@ const createRecipe = async (req, res) => {
 
 const getRecipe = async (req, res) => {
   try {
-    const getSelectedRecipe = await recipe.findOne({ _id: req.params.id });
+    const getSelectedRecipe = await Recipe.findOne({ _id: req.params.id });
     if (!getSelectedRecipe) {
       return res.status(404).json({ error: "recipe does not exist" });
     }
@@ -35,7 +35,7 @@ const getRecipe = async (req, res) => {
 
 const updateRecipe = async (req, res) => {
   try {
-    const updateSelectedRecipe = await recipe.findOneAndUpdate(
+    const updateSelectedRecipe = await Recipe.findOneAndUpdate(
       { _id: req.params.id },
       req.body,
       { new: true, runValidators: true }
@@ -53,7 +53,7 @@ const updateRecipe = async (req, res) => {
 
 const deleteRecipe = async (req, res) => {
   try {
-    const deleteSelectedRecipe = await recipe.findOneAndDelete({
+    const deleteSelectedRecipe = await Recipe.findOneAndDelete({
       _id: req.params.id,
     });
 
