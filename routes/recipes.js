@@ -11,8 +11,8 @@ const {
 
 router.get("/", getAllRecipes);
 router.post("/", createRecipe);
-router.get("/:id", getRecipe);
-router.patch("/:id", updateRecipe);
-router.delete("/:id", deleteRecipe);
+router.get("/:recipeId", getRecipe);
+router.patch("/:recipeId", updateRecipe);
+router.delete("/:recipeId", deleteRecipe);
 
 module.exports = router;
