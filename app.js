@@ -5,6 +5,12 @@ const app = express();
 const notFound = require("./middleware/not-found");
 const authRouter = require("./routes/auth");
 const recipesRouter = require("./routes/recipes");
+const errorHandler = require("./middleware/error-handler");
+
+// extra security packages
+const helmet = require("helmet");
+const cors = require("cors");
+const expressRateLimit = require("express-rate-limit");
 
 // connectDB
 const connectDB = require("./db/connect");
@@ -21,6 +27,18 @@ app.use(express.urlencoded({ extended: true }));
 // parse JSON data from browser into req.body
 app.use(express.json());
 
+// invoking security packages
+app.use(
+  expressRateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+    standardHeaders: "draft-8", // draft-6: `RateLimit-*` headers; draft-7 & draft-8: combined `RateLimit` header
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+  })
+);
+app.use(helmet());
+app.use(cors());
+
 //===Routes and Middleware===
 app.get("/", (req, res) => {
   res.status(200).send("Home Page");
@@ -33,6 +51,7 @@ app.use("/recipes", authenticateUser, recipesRouter);
 //Catch all 404 middleware (not-found.js)
 app.use(notFound);
 
+app.use(errorHandler);
 //===Listening to port===
 
 const port = process.env.PORT || 3000;

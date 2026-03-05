@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "Lato", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  background-color: seashell;
+  padding: 2em;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+}
+main {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-section {
+  display: flex;
+  gap: 1.5em;
+  font-size: 2rem;
+}
+
+.btn {
+  border: 2px solid black;
+  padding: 0.3em 0.8em;
+  text-decoration: none;
+  border-radius: 20px;
+  color: black;
+  cursor: pointer;
+  transition: transform 3s ease;
+}
+
+.btn:hover {
+  background-color: seashell;
+}
+footer {
+  text-align: center;
+  background-color: seashell;
+  padding: 2em;
+}

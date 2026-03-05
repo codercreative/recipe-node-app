@@ -1,31 +1,31 @@
 const Recipe = require("../models/Recipe");
 const { StatusCodes } = require("http-status-codes");
-const { BadRequestError, NotFoundError } = require("../errors");
+const { NotFoundError } = require("../errors");
 
 // all jobs associated to particular user by inserting createdBy: req.user.userId
-const getAllRecipes = async (req, res) => {
+const getAllRecipes = async (req, res, next) => {
   try {
     const allRecipes = await Recipe.find({ createdBy: req.user.userId });
     res.status(StatusCodes.OK).json(allRecipes);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "cannot get all recipes" });
+    // res.status(500).json({ error: "cannot get all recipes" });
+    next(error);
   }
 };
 
-const createRecipe = async (req, res) => {
+const createRecipe = async (req, res, next) => {
   try {
     // this line takes the createdBy in Schema and connects to the recipe created. Attaching the user ID to the recipe before saving. Ensuring ownership at server-side
     req.body.createdBy = req.user.userId;
     const newRecipe = await Recipe.create(req.body);
     res.status(StatusCodes.CREATED).json({ newRecipe });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "cannot create recipe" });
+    // res.status(500).json({ error: "cannot create recipe" });
+    next(error);
   }
 };
 
-const getRecipe = async (req, res) => {
+const getRecipe = async (req, res, next) => {
   try {
     // connecting the selected recipe with the user that created the recipe
     const userId = req.user.userId;
@@ -36,18 +36,19 @@ const getRecipe = async (req, res) => {
       createdBy: userId,
     });
     if (!getSelectedRecipe) {
-      return res
-        .status(StatusCodes.NOT_FOUND)
-        .json({ error: "Recipe does not exist" });
+      // return res
+      //   .status(StatusCodes.NOT_FOUND)
+      //   .json({ error: "Recipe does not exist" });
+      throw new NotFoundError("Recipe does not exist");
     }
     res.status(StatusCodes.OK).json({ getSelectedRecipe });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "cannot get selected recipe" });
+    // res.status(500).json({ error: "cannot get selected recipe" });
+    next(error);
   }
 };
 
-const updateRecipe = async (req, res) => {
+const updateRecipe = async (req, res, next) => {
   try {
     const userId = req.user.userId;
     const recipeId = req.params.recipeId;
@@ -59,18 +60,19 @@ const updateRecipe = async (req, res) => {
     );
 
     if (!updateSelectedRecipe) {
-      return res
-        .status(StatusCodes.NOT_FOUND)
-        .json({ error: "recipe does not exist" });
+      // return res
+      //   .status(StatusCodes.NOT_FOUND)
+      //   .json({ error: "recipe does not exist" });
+      throw new NotFoundError("Recipe does not exist");
     }
     res.status(StatusCodes.OK).json({ updateSelectedRecipe });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "cannot get the selected recipe to update" });
+    // res.status(500).json({ error: "cannot get the selected recipe to update" });
+    next(error);
   }
 };
 
-const deleteRecipe = async (req, res) => {
+const deleteRecipe = async (req, res, next) => {
   try {
     const userId = req.user.userId;
     const recipeId = req.params.recipeId;
@@ -81,14 +83,15 @@ const deleteRecipe = async (req, res) => {
     });
 
     if (!deleteSelectedRecipe) {
-      return res.status(StatusCodes.NOT_FOUND).json({
-        error: "recipe does not exist",
-      });
+      // return res.status(StatusCodes.NOT_FOUND).json({
+      //   error: "recipe does not exist",
+      // });
+      throw new NotFoundError("Recipe does not exist");
     }
     res.status(StatusCodes.OK).json({ deleteSelectedRecipe });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "cannot delete selected recipe" });
+    next(error);
+    // res.status(500).json({ error: "cannot delete selected recipe" });
   }
 };
 
