@@ -20,14 +20,12 @@ header {
   padding: 2em;
 }
 
-h1 {
-  font-family: "Playfair Display", serif;
-}
 main {
   display: flex;
   flex: 1;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .btn-section {
@@ -49,8 +47,35 @@ main {
 .btn:hover {
   background-color: seashell;
 }
+
+.form {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.5em;
+  margin: 1em 0;
+}
+
+.form input {
+  font-size: 1.1rem;
+  padding: 0.3em;
+}
 footer {
   text-align: center;
   background-color: seashell;
   padding: 2em;
+}
+
+/* Interactive messages via JavaScript files */
+
+#error-msg {
+  color: red;
+}
+
+#greeting {
+  color: green;
 }

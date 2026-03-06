@@ -24,7 +24,7 @@ const RecipeSchema = new mongoose.Schema(
     },
     ovenTemp: {
       type: Number,
-      min: 100,
+      min: 0,
       max: 600,
     },
     // The recipe will be tied to a user with createdBy

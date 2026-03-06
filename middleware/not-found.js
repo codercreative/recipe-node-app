@@ -1,4 +1,4 @@
 const notFound = (req, res) =>
-  res.status(404).json({ error: "page does not exist" });
+  res.status(404).type("html").send("<h1>Page does not exist</h1>");
 
 module.exports = notFound;

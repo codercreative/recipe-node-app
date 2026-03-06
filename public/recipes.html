@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/recipes.css" />
+    <title>My Recipes</title>
+  </head>
+  <body>
+    <header>
+      <h1>My Recipes</h1>
+      <p id="greeting"></p>
+    </header>
+    <main>
+      <section class="add-recipe-section">
+        <h2>Add a Recipe</h2>
+        <form class="form" id="add-recipe-form">
+          <label for="name">Title</label>
+          <input
+            id="title"
+            type="text"
+            placeholder="Enter title"
+            name="title"
+            required
+          />
+          <label for="ingredients">Ingredients (enter with comma)</label>
+          <input
+            id="ingredients"
+            type="text"
+            placeholder="Enter ingredients"
+            name="ingredients"
+            required
+          />
+
+          <label for="instructions">Instructions (enter with comma)</label>
+          <input
+            id="instructions"
+            type="text"
+            placeholder="How to prepare..."
+            name="preparation"
+            required
+          />
+
+          <label for="prepTime">Preparation Time</label>
+          <input
+            id="prep-time"
+            type="number"
+            placeholder="Enter preparation time..."
+            name="preparation"
+            required
+          />
+
+          <label for="ovenTemp">Oven Temperature</label>
+          <input
+            id="oven-temp"
+            type="number"
+            placeholder="Enter oven temperature (if recipe calls for it).."
+            name="oven-temp"
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+        <p id="error-msg"></p>
+      </section>
+
+      <section>
+        <h2>Your Saved Recipes</h2>
+        <!-- article cards are inserted here with JS-->
+      </section>
+    </main>
+    <footer>&copy; Made by Chris 👩‍🍳</footer>
+    <script src="js/recipes.js"></script>
+  </body>
+</html>
