@@ -1,3 +1,7 @@
+/* =========================================
+   GLOBAL STYLES
+========================================= */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -20,57 +24,15 @@ header {
   padding: 2em;
 }
 
-main {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.btn-section {
-  display: flex;
-  gap: 1.5em;
-  font-size: 2rem;
-}
-
-.btn {
-  border: 2px solid black;
-  padding: 0.3em 0.8em;
-  text-decoration: none;
-  border-radius: 20px;
-  color: black;
-  cursor: pointer;
-  transition: transform 3s ease;
-}
-
-.btn:hover {
-  background-color: seashell;
-}
-
-.form {
-  display: block;
-  width: 100%;
-  max-width: 400px;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 0.5em;
-  margin: 1em 0;
-}
-
-.form input {
-  font-size: 1.1rem;
-  padding: 0.3em;
-}
 footer {
   text-align: center;
   background-color: seashell;
   padding: 2em;
 }
 
-/* Interactive messages via JavaScript files */
+/* =========================================
+   Interactive messages via JavaScript files
+========================================= */
 
 #error-msg {
   color: red;

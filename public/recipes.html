@@ -16,7 +16,7 @@
       <section class="add-recipe-section">
         <h2>Add a Recipe</h2>
         <form class="form" id="add-recipe-form">
-          <label for="name">Title</label>
+          <label for="title">Title</label>
           <input
             id="title"
             type="text"
@@ -24,52 +24,56 @@
             name="title"
             required
           />
-          <label for="ingredients">Ingredients (enter with comma)</label>
-          <input
+          <label for="ingredients"
+            >Ingredients (enter one ingredient per line)</label
+          >
+          <textarea
             id="ingredients"
-            type="text"
             placeholder="Enter ingredients"
             name="ingredients"
             required
-          />
+          ></textarea>
 
-          <label for="instructions">Instructions (enter with comma)</label>
-          <input
+          <label for="instructions"
+            >Instructions (enter one instruction per line)</label
+          >
+          <textarea
             id="instructions"
-            type="text"
             placeholder="How to prepare..."
-            name="preparation"
+            name="instructions"
             required
-          />
+          ></textarea>
 
-          <label for="prepTime">Preparation Time</label>
+          <label for="preparation">Preparation Time</label>
           <input
-            id="prep-time"
+            id="preparation"
             type="number"
             placeholder="Enter preparation time..."
             name="preparation"
             required
           />
 
-          <label for="ovenTemp">Oven Temperature</label>
+          <label for="temp">Oven Temperature</label>
           <input
-            id="oven-temp"
+            id="temp"
             type="number"
             placeholder="Enter oven temperature (if recipe calls for it).."
-            name="oven-temp"
+            name="temp"
             required
           />
-          <button type="submit">Submit</button>
+          <button class="btn" type="submit">Add Recipe</button>
         </form>
         <p id="error-msg"></p>
       </section>
 
-      <section>
-        <h2>Your Saved Recipes</h2>
-        <!-- article cards are inserted here with JS-->
+      <section id="saved-recipes-section">
+        <h2>Saved Recipes</h2>
+        <div id="recipe-cards-container">
+          <!-- article cards are inserted here with JS-->
+        </div>
       </section>
     </main>
-    <footer>&copy; Made by Chris 👩‍🍳</footer>
-    <script src="js/recipes.js"></script>
+    <!-- <footer>&copy; 2026 Chris 👩‍🍳</footer> -->
+    <script src="js/recipes.js" defer></script>
   </body>
 </html>

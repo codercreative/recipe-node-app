@@ -11,18 +11,18 @@ const RecipeSchema = new mongoose.Schema(
     ingredients: {
       type: [String],
       validate: [minOne, "provide at least one ingredient"],
-      required: [true, "provide ingredients"],
+      required: [true, "please provide ingredients"],
     },
     instructions: {
       type: [String],
       validate: [minOne, "provide at least one instruction"],
       required: [true, "please provide instructions"],
     },
-    prepTime: {
+    preparation: {
       type: Number,
       min: 1,
     },
-    ovenTemp: {
+    temp: {
       type: Number,
       min: 0,
       max: 600,

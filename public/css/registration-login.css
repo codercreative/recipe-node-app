@@ -1,3 +1,12 @@
+main {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3em;
+}
+
 .form {
   display: block;
   width: 100%;
@@ -30,9 +39,4 @@
 
 .btn:hover {
   background-color: rgb(255, 172, 113);
-}
-
-.recipe-article ul {
-  list-style-type: disc;
-  padding-left: 20px;
 }
