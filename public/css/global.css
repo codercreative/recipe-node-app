@@ -22,6 +22,34 @@ header {
   text-align: center;
   background-color: seashell;
   padding: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+}
+
+/* header h1 {
+  margin-right: auto;
+} */
+
+.nav-header {
+  display: flex;
+}
+
+.nav-btn {
+  border: 1px solid transparent;
+  background: none;
+  font-size: 1.2rem;
+  padding: 0.2em 0.5em;
+  text-decoration: none;
+  border-radius: 20px;
+  color: black;
+  transition: transform 3s ease;
+  cursor: pointer;
+}
+
+.nav-btn:hover {
+  border: 1px solid black;
 }
 
 footer {
@@ -31,13 +59,12 @@ footer {
 }
 
 /* =========================================
-   Interactive messages via JavaScript files
+   MEDIA QUERIES
 ========================================= */
 
-#error-msg {
-  color: red;
-}
-
-#greeting {
-  color: green;
+@media (max-width: 425px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
 }

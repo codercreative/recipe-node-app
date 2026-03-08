@@ -10,7 +10,9 @@
   <body>
     <header>
       <h1>My Recipes</h1>
-      <p id="greeting"></p>
+      <nav class="nav-header">
+        <button id="logoff-btn" class="nav-btn">Log Off</button>
+      </nav>
     </header>
     <main>
       <section class="add-recipe-section">
@@ -61,7 +63,7 @@
             name="temp"
             required
           />
-          <button class="btn" type="submit">Add Recipe</button>
+          <button class="btn add-btn" type="submit">Add Recipe</button>
         </form>
         <p id="error-msg"></p>
       </section>
@@ -72,7 +74,31 @@
           <!-- article cards are inserted here with JS-->
         </div>
       </section>
+      <div id="modal-overlay" class="hidden modal-overlay">
+        <div id="edit-modal" class="edit-modal">
+          <form class="form edit-form" id="edit-recipe-form">
+            <label for="edit-title">Title</label>
+            <input id="edit-title" type="text" />
+            <label for="edit-ingredients">Ingredients</label>
+            <textarea id="edit-ingredients" rows="4"></textarea>
+
+            <label for="instructions">Instructions</label>
+            <textarea id="edit-instructions" rows="4"></textarea>
+
+            <label for="edit-preparation">Preparation Time (min)</label>
+            <input id="edit-preparation" type="number" />
+
+            <label for="edit-temp">Oven Temperature (F)</label>
+            <input id="edit-temp" type="number" />
+            <button id="exit-btn" class="exit-btn" type="button">Cancel</button>
+            <button id="save-edit-btn" class="update-edit-btn" type="submit">
+              Update
+            </button>
+          </form>
+        </div>
+      </div>
     </main>
+
     <!-- <footer>&copy; 2026 Chris 👩‍🍳</footer> -->
     <script src="js/recipes.js" defer></script>
   </body>

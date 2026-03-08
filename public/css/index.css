@@ -4,6 +4,10 @@ main {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background-image: url("../images/hero-img-brooke-lark-unsplash.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .form {
@@ -21,24 +25,4 @@ main {
 .form input {
   font-size: 1.1rem;
   padding: 0.3em;
-}
-
-.btn-section {
-  display: flex;
-  gap: 1.5em;
-  font-size: 2rem;
-}
-
-.btn {
-  border: 2px solid black;
-  padding: 0.3em 0.8em;
-  text-decoration: none;
-  border-radius: 20px;
-  color: black;
-  cursor: pointer;
-  transition: transform 3s ease;
-}
-
-.btn:hover {
-  background-color: seashell;
 }
