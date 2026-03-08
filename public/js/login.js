@@ -28,6 +28,7 @@ form.addEventListener("submit", async (e) => {
     } else if (!response.ok) {
       // http error (server responded, but status is not 2xx)
       errorMsg.textContent = result.msg;
+      errorMsg.style.color = "red";
     }
   } catch (error) {
     // Network error

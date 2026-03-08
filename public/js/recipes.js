@@ -188,10 +188,16 @@ async function showRecipes() {
 
     // title
     const title = document.createElement("h3");
+    title.classList.add("saved-recipe-title");
     title.textContent = recipe.title;
     article.appendChild(title);
 
     // ingredients
+    const ingredientsTitle = document.createElement("h4");
+    ingredientsTitle.textContent = "Ingredients:";
+    ingredientsTitle.classList.add("ingredients-title");
+    article.appendChild(ingredientsTitle);
+
     const ingredientsList = document.createElement("ul");
     recipe.ingredients.forEach((ingredient) => {
       const li = document.createElement("li");
@@ -201,6 +207,11 @@ async function showRecipes() {
     article.appendChild(ingredientsList);
 
     // instructions
+    const instructionsTitle = document.createElement("h4");
+    instructionsTitle.textContent = "Instructions:";
+    instructionsTitle.classList.add("instructions-title");
+    article.appendChild(instructionsTitle);
+
     const instructionsList = document.createElement("ul");
     recipe.instructions.forEach((instruction) => {
       const li = document.createElement("li");
@@ -211,12 +222,12 @@ async function showRecipes() {
 
     // preparation
     const preparationSpan = document.createElement("span");
-    preparationSpan.textContent = `Prep time ${recipe.preparation} min`;
+    preparationSpan.textContent = `Prep time: ${recipe.preparation} min.`;
     article.appendChild(preparationSpan);
 
     // temp
     const tempSpan = document.createElement("span");
-    tempSpan.textContent = `Oven temp ${recipe.temp} F`;
+    tempSpan.textContent = `Oven temp: ${recipe.temp} °F`;
     article.appendChild(tempSpan);
 
     recipeCardsContainer.appendChild(article);
