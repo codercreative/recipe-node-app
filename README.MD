@@ -4,15 +4,15 @@ Final project for "Node.js" course with [Code the Dream](https://codethedream.or
 
 ## Preview
 
-🚧 in progress - image will be added after deployment
+![Hero Image](public/images/hero-img.webp)
 
-## Live Site
+## Live Site on Render
 
-🚧 in progress - link will be added after deployment
+[Recipe Node App](https://final-recipe-node-app-christina.onrender.com/)
 
 ## Github Link
 
-🚧 in progress - link will be added after deployment
+[GitHub Link](https://github.com/codercreative/recipe-node-app)
 
 ## Project Setup
 
@@ -22,11 +22,12 @@ Install dependencies:
 
 `npm install`
 
-In the root create an `.env` file with the following two variables with your own values:
+In the root create an `.env` file with your own values:
 
 ```
 MONGO_URI
 JWT_SECRET
+JWT_LIFETIME
 ```
 
 To run the server:

@@ -5,16 +5,22 @@ main {
   justify-content: center;
   flex-direction: column;
   gap: 3em;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.registration-title,
+.registration-subtitle,
+.login-title {
+  text-align: center;
 }
 
 .form {
   display: block;
   width: 100%;
   max-width: 400px;
-
   display: flex;
   flex-direction: column;
-
   gap: 0.5em;
   margin: 1em 0;
 }
@@ -39,4 +45,11 @@ main {
 
 .btn:hover {
   background-color: #ffc078;
+}
+
+@media (max-width: 768px) {
+  .registration-title,
+  .login-title {
+    margin-top: 2em;
+  }
 }
