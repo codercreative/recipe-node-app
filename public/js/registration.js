@@ -26,10 +26,19 @@ form.addEventListener("submit", async (e) => {
     if (response.ok) {
       localStorage.setItem("token", result.token);
       localStorage.setItem("name", result.user.name);
-      window.location.replace("login.html");
+
+      showToast("Account created successfully", 1800);
+
+      setTimeout(() => {
+        window.location.replace("login.html");
+      }, 2000);
     } else if (!response.ok) {
       // http error (server responded, but status is not 2xx)
-      errorMsg.textContent = result.msg;
+      if (result.msg.toLowerCase().includes("duplicate")) {
+        showToast("You have already been registered", 1800);
+      } else {
+        showToast(result.msg || "Registration failed.", 1800);
+      }
     }
   } catch (error) {
     // Network error
@@ -38,6 +47,18 @@ form.addEventListener("submit", async (e) => {
     // - Server is down
     // - Wrong endpoint URL
     console.log("LOGGED ERROR: ", error);
-    errorMsg.textContent = `Error message: ${error.message}`;
+    showToast(`Network error: ${error.message}`);
   }
 });
+
+// ==========TOAST NOTIFICATION HELPER FUNCTION ==========
+
+function showToast(message, duration = 7000) {
+  const toast = document.getElementById("toast-notification");
+  toast.textContent = message;
+  toast.classList.add("toast-visible");
+
+  setTimeout(() => {
+    toast.classList.remove("toast-visible");
+  }, duration);
+}

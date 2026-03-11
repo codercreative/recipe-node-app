@@ -24,11 +24,15 @@ form.addEventListener("submit", async (e) => {
 
     if (response.ok) {
       localStorage.setItem("token", result.token);
-      window.location.replace("recipes.html");
+
+      showToast("Login successful", 1800);
+
+      setTimeout(() => {
+        window.location.replace("recipes.html");
+      }, 2000);
     } else if (!response.ok) {
       // http error (server responded, but status is not 2xx)
-      errorMsg.textContent = result.msg;
-      errorMsg.style.color = "red";
+      showToast(result.msg || "Login failed. Please check your credentials");
     }
   } catch (error) {
     // Network error
@@ -37,6 +41,18 @@ form.addEventListener("submit", async (e) => {
     // - Server is down
     // - Wrong endpoint URL
     console.log("LOGGED ERROR: ", error);
-    errorMsg.textContent = `Error message: ${error.message}`;
+    showToast(`Network error: ${error.message}`);
   }
 });
+
+// ==========TOAST NOTIFICATION HELPER FUNCTION ==========
+
+function showToast(message, duration = 7000) {
+  const toast = document.getElementById("toast-notification");
+  toast.textContent = message;
+  toast.classList.add("toast-visible");
+
+  setTimeout(() => {
+    toast.classList.remove("toast-visible");
+  }, duration);
+}

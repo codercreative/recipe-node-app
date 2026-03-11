@@ -6,7 +6,10 @@ const { NotFoundError } = require("../errors");
 const getAllRecipes = async (req, res, next) => {
   try {
     const allRecipes = await Recipe.find({ createdBy: req.user.userId });
-    res.status(StatusCodes.OK).json(allRecipes);
+    res.status(StatusCodes.OK).json({
+      message: "All recipes successfully retrieved",
+      data: allRecipes,
+    });
   } catch (error) {
     // res.status(500).json({ error: "cannot get all recipes" });
     next(error);

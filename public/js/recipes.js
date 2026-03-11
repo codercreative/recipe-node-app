@@ -7,7 +7,6 @@ const form = document.getElementById("add-recipe-form");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  console.log("the add a recipe form works!");
   // get values from form fields
   const data = {
     title: document.getElementById("title").value,
@@ -25,8 +24,6 @@ form.addEventListener("submit", async (e) => {
     temp: Number(document.getElementById("temp").value),
   };
 
-  console.log("DATA: ", data);
-
   try {
     const token = localStorage.getItem("token");
     // send data to backend register route / source: mdn using the fetch api and headers adapted from Postman code > JavaScript fetch snippet
@@ -42,10 +39,17 @@ form.addEventListener("submit", async (e) => {
     // console.log("RESULT: ", result);
 
     if (response.ok) {
-      window.location.replace("recipes.html");
+      // window.location.replace("recipes.html");
+      // await response.json();
+      showToast("Recipe successfully added", 1800);
+      form.reset();
     } else if (!response.ok) {
       // http error (server responded, but status is not 2xx)
       console.log("An error occurred");
+      const result = await response.json();
+      showToast(
+        result.message || `Failed to add recipe (status: ${response.status})`
+      );
     }
   } catch (error) {
     // Network error
@@ -53,7 +57,8 @@ form.addEventListener("submit", async (e) => {
     // - No internet connection
     // - Server is down
     // - Wrong endpoint URL
-    console.log("LOGGED ERROR: ", error);
+
+    showToast("Network error: Could not add recipe");
   }
 });
 
@@ -80,8 +85,6 @@ editRecipeForm.addEventListener("submit", async (e) => {
     temp: Number(document.getElementById("edit-temp").value),
   };
 
-  console.log("DATA: ", data);
-
   try {
     const token = localStorage.getItem("token");
     // send data to backend register route / source: mdn using the fetch api and headers adapted from Postman code > JavaScript fetch snippet
@@ -97,10 +100,17 @@ editRecipeForm.addEventListener("submit", async (e) => {
     // console.log("RESULT: ", result);
 
     if (response.ok) {
-      window.location.replace("recipes.html");
+      // window.location.replace("recipes.html");
+      showToast("Recipe successfully updated", 1800);
+      modal.classList.add("hidden");
+      showRecipes();
     } else if (!response.ok) {
       // http error (server responded, but status is not 2xx)
       console.log("An error occurred");
+      const result = await response.json();
+      showToast(
+        result.message || `Failed to update recipe (status: ${response.status})`
+      );
     }
   } catch (error) {
     // Network error
@@ -109,6 +119,7 @@ editRecipeForm.addEventListener("submit", async (e) => {
     // - Server is down
     // - Wrong endpoint URL
     console.log("LOGGED ERROR: ", error);
+    showToast("Network error: Could not update recipe");
   }
 });
 
@@ -124,11 +135,17 @@ async function getRecipes() {
         Authorization: `Bearer ${token}`,
       },
     });
-    const recipesArray = await response.json();
-    console.log(recipesArray);
+    // const recipesArray = await response.json();
+    // console.log(recipesArray);
+    // return recipesArray;
+
+    const result = await response.json();
+
+    const recipesArray = result.data || [];
     return recipesArray;
   } catch (error) {
     console.log(error);
+    showToast("Network error: Could not load recipes");
   }
 }
 
@@ -164,9 +181,16 @@ async function deleteRecipe(recipeId, recipeArticle) {
     });
     if (response.ok) {
       recipeArticle.remove();
+      showToast("Recipe successfully deleted", 1800);
+    } else if (!response.ok) {
+      const result = await response.json();
+      showToast(
+        result.message || `Failed to delete recipe (status: ${response.status})`
+      );
     }
   } catch (error) {
     console.log("Delete error: ", error);
+    showToast("Network error: Could not delete recipe");
   }
 }
 
@@ -267,6 +291,18 @@ async function showRecipes() {
 
 showRecipes();
 
+// ==========TOAST NOTIFICATION HELPER FUNCTION ==========
+
+function showToast(message, duration = 7000) {
+  const toast = document.getElementById("toast-notification");
+  toast.textContent = message;
+  toast.classList.add("toast-visible");
+
+  setTimeout(() => {
+    toast.classList.remove("toast-visible");
+  }, duration);
+}
+
 // ========== LOG OFF BUTTON ==========
 
 document.getElementById("logoff-btn").addEventListener("click", () => {
@@ -274,7 +310,7 @@ document.getElementById("logoff-btn").addEventListener("click", () => {
   window.location.href = "index.html";
 });
 
-// ========== EXIT / CANCLE EDIT RECIPE MODAL==========
+// ========== EXIT / CANCEL EDIT RECIPE MODAL==========
 
 document.getElementById("exit-btn").addEventListener("click", () => {
   modal.classList.add("hidden");
