@@ -43,6 +43,7 @@ form.addEventListener("submit", async (e) => {
       // await response.json();
       showToast("Recipe successfully added", 1800);
       form.reset();
+      await showRecipes();
     } else if (!response.ok) {
       // http error (server responded, but status is not 2xx)
       console.log("An error occurred");
@@ -103,7 +104,7 @@ editRecipeForm.addEventListener("submit", async (e) => {
       // window.location.replace("recipes.html");
       showToast("Recipe successfully updated", 1800);
       modal.classList.add("hidden");
-      showRecipes();
+      await showRecipes();
     } else if (!response.ok) {
       // http error (server responded, but status is not 2xx)
       console.log("An error occurred");
