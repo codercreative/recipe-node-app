@@ -56,9 +56,16 @@ app.use(errorHandler);
 
 const port = process.env.PORT || 3000;
 
+// for testing
+
+let mongoURL = process.env.MONGO_URI;
+if (process.env.NODE_ENV == "test") {
+  mongoURL = process.env.MONGO_URI_TEST;
+}
+
 const start = async () => {
   try {
-    await connectDB(process.env.MONGO_URI);
+    await connectDB(mongoURL);
     app.listen(port, () => console.log(`Server is listening on port ${port}`));
   } catch (error) {
     console.log(error);
@@ -66,6 +73,9 @@ const start = async () => {
 };
 
 start();
+
+console.log("CURRENT NODE ENV", process.env.NODE_ENV);
+console.log("Using MongoDB URI", mongoURL);
 
 console.log("Recipe app is up");
 
