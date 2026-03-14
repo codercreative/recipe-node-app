@@ -39,6 +39,15 @@ app.use(
 app.use(helmet());
 app.use(cors());
 
+// Testing for rendered HTML
+app.use((req, res, next) => {
+  if (req.path == "/multiply") {
+    res.set("Content-Type", "application/json");
+  } else {
+    res.set("Content-Type", "text/html");
+  }
+  next();
+});
 //===Routes and Middleware===
 app.get("/", (req, res) => {
   res.status(200).send("Home Page");
@@ -48,6 +57,18 @@ app.use("/auth", authRouter);
 // inserting auth middleware before the recipesRouter to proctect user routes
 app.use("/recipes", authenticateUser, recipesRouter);
 
+// multiply testing route - function testing for an API.
+// running npm run dev and inserting: http://localhost:3000/multiply?first=5&second=27
+// result in browser is {result: 135}
+app.get("/multiply", (req, res) => {
+  let result = Number(req.query.first) * Number(req.query.second);
+  if (isNaN(result)) {
+    result = "NaN";
+  } else if (result == null) {
+    result = "null";
+  }
+  res.json({ result: result });
+});
 //Catch all 404 middleware (not-found.js)
 app.use(notFound);
 
@@ -76,10 +97,11 @@ start();
 
 console.log("CURRENT NODE ENV", process.env.NODE_ENV);
 console.log("Using MongoDB URI", mongoURL);
-
 console.log("Recipe app is up");
 
 //  / - public landing page with register and login button
 //  /register - public registration
 //  /login - public login
 //  /recipes - requires authorization for user to access
+
+module.exports = { app };
