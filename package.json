@@ -4,7 +4,7 @@
   "description": "Full stack recipe app built with Node, Express and MongoDB.  Users can register and log in to create, save, update and delete their own favorite recipes.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test mocha tests/*.js --timeout 5000 --exit",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
@@ -12,17 +12,24 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "@faker-js/faker": "^10.3.0",
+    "chai": "^6.2.2",
+    "chai-http": "^5.1.2",
+    "factory-bot": "^6.3.1",
+    "mocha": "^11.7.5",
+    "nodemon": "^3.1.14",
+    "puppeteer": "^24.39.0"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "connect-mongodb-session": "^5.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "express-rate-limit": "^8.2.1",
+    "express-rate-limit": "^8.3.1",
     "helmet": "^8.1.0",
     "http-status-codes": "^2.3.0",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.2.1"
+    "mongoose": "^9.3.0"
   }
 }
