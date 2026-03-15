@@ -78,7 +78,6 @@ app.use(errorHandler);
 const port = process.env.PORT || 3000;
 
 // for testing
-
 let mongoURL = process.env.MONGO_URI;
 if (process.env.NODE_ENV == "test") {
   mongoURL = process.env.MONGO_URI_TEST;
@@ -87,6 +86,7 @@ if (process.env.NODE_ENV == "test") {
 const start = async () => {
   try {
     await connectDB(mongoURL);
+    console.log("Connecting to MongoDB", mongoURL);
     app.listen(port, () => console.log(`Server is listening on port ${port}`));
   } catch (error) {
     console.log(error);

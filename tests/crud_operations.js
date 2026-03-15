@@ -32,4 +32,26 @@ describe("tests for create and read operations on recipes", function () {
 
     expect(res).to.have.status(200);
   });
+
+  it("should create a recipe", async () => {
+    const { expect, request } = await get_chai();
+
+    const dataToPost = {
+      title: "Chocolate Cake",
+      ingredients: ["chocolate", "flour", "eggs", "sugar"],
+      instructions: ["mix it all together and back"],
+      preparation: 60,
+      temp: 250,
+    };
+
+    const res = await request
+      .execute(app)
+      .post("/recipes")
+      .set("Authorization", `Bearer ${this.token}`)
+      .send(dataToPost);
+
+    const recipe = await Recipe.findOne({ title: "Chocolate Cake" });
+    expect(recipe).to.not.be.null;
+    expect(res).to.have.status(201);
+  });
 });
